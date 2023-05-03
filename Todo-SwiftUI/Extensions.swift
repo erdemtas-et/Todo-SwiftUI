@@ -11,22 +11,14 @@ extension Color {
     static let colorArray: [Color] = [.gray, .orange, .black, .purple, .blue, .cyan, .red,.green,.brown,.mint,.indigo,.pink,.yellow,.teal]
     
     static func randomBackgroundColor() -> Color {
-       
         return colorArray.randomElement()!
     }
 }
 
-
 extension Date {
-    func formatDateLong() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        return dateFormatter.string(from: self)
-    }
-    
     func formatDateTime() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = .full
+        dateFormatter.dateFormat = "dd MMM HH:mm"
         return dateFormatter.string(from: self)
     }
 }

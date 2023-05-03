@@ -19,9 +19,9 @@ struct TodoItem: View {
                 } label: {
                     Image(systemName : todo.imageName)
                         .resizable()
-                        .frame(width: 40, height: 40, alignment: .leading)
+                        .frame(width: 30, height: 30, alignment: .leading)
                         .foregroundColor(todo.color)
-                        .padding()
+                        
                     
                     
                 }.buttonStyle(BorderlessButtonStyle())
@@ -30,7 +30,7 @@ struct TodoItem: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text(todo.title)
-                            .font(.title2)
+                            .font(.title3)
                             .strikethrough(todo.isCompleted)
                         Text(todo.note)
                             .strikethrough(todo.isCompleted)
@@ -38,18 +38,13 @@ struct TodoItem: View {
                     }
                     Spacer()
                     VStack{
-                        Text("Deadline: \(todo.deadlineDate.formatDateLong())")
-                            .font(.subheadline)
-                        Spacer()
-                        Text("Created: \(todo.date.formatDateLong())")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                        
+                        Text( todo.deadlineDate.formatDateTime())
+                            .font(.caption2)
+ 
                     }
                     
                 }
             }
-            
         }
     }
 }
