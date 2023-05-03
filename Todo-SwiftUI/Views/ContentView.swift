@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isShowingDetail = false
+    
     @ObservedObject var todoModelList = TodoModelList()
     
     var body: some View {
@@ -22,17 +22,14 @@ struct ContentView: View {
                 .navigationTitle("Todos")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            isShowingDetail = true
-                        } label: {
+                        NavigationLink(destination:  AddTodoView(todoModelList: todoModelList),
+                        label: {
                             Image(systemName: "plus.circle.fill")
                                 .resizable()
                                 .frame(width: 25, height: 25, alignment: .bottom)
                                 .foregroundColor(.orange)
-                        } .sheet(isPresented: $isShowingDetail) {
-                            AddTodoView(todoModelList: todoModelList)
                         }
-                    }
+                    )}
                 }
             }
         }

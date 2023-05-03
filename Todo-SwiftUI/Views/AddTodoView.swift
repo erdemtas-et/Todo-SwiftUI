@@ -9,14 +9,14 @@ import SwiftUI
 import Combine
 
 struct AddTodoView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State var todoModelList : TodoModelList
-    @State private var isCircleSelected = false
     @State var titleString : String = ""
     @State var noteString : String = ""
     @State private var todoDate : Date = .now
     @State var todoColor : Color = .gray
     @State var isButtonActivated  = false
-    
+    @State var path = [String]()
     
     func validateFields() {
         if titleString != "" && noteString != "" {
@@ -27,7 +27,7 @@ struct AddTodoView: View {
     }
     
     var body: some View {
-    NavigationView {
+        
         Form {
             Section {
                 VStack(alignment: .leading) {
@@ -46,19 +46,16 @@ struct AddTodoView: View {
                         .font(.caption)
                     TextField("Note", text: $noteString)
                 }.padding(.vertical,4.0)
-                
-                
             }
             
             Section {
                 HStack{
-                    DatePicker("Deadline", selection: $todoDate)
+                    DatePicker("Deadline", selection: $todoDate,in:.now...)
                         .datePickerStyle(.graphical)
                         .frame(width: 320)
                 }
             }
-            
-            
+
             Section {
                 VStack {
                     HStack {
@@ -76,27 +73,30 @@ struct AddTodoView: View {
                                    }, label: {
                                        Circle()
                                            .fill(color)
-                                   }).buttonStyle(.borderless)
+                                   })
+                                   .buttonStyle(.borderless)
                                }
                            }
                        }
                 }
-            Section{
-            Button {
-                todoModelList.addTodo(todo: Todo(title: titleString, note: noteString))
-            } label: {
-                Text("Save")
-
-            }.frame(maxWidth: .infinity)
-                .foregroundColor(isButtonActivated ? .blue : .gray)
-                .tint(.green)
-                .disabled(!isButtonActivated)
-            
-            }
-
         }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        todoModelList.addTodo(todo: Todo(title: titleString, note: noteString, deadlineDate: todoDate))
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                    label: {
+                        Image(systemName: "plus.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30, alignment: .bottom)
+                            .foregroundColor(isButtonActivated ? .green : .gray)
+                    }.disabled(!isButtonActivated)
+                }
+            }
+            
+        
     }
-  }
 }
 
 struct AddTodoView_Previews: PreviewProvider {

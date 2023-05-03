@@ -56,6 +56,6 @@ struct TodoItem: View {
 
 struct TodoItem_Previews: PreviewProvider {
     static var previews: some View {
-        TodoItem(todo: Todo(title: "Title Example", note: "Note Example"))
+        TodoItem(todo: Todo(title: "Title Example", note: "Note Example",deadlineDate: Date.now))
     }
 }
