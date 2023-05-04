@@ -15,16 +15,17 @@ class Todo : ObservableObject, Identifiable {
     @Published var isCompleted : Bool = false
     let date : Date = .now
     let deadlineDate : Date
-    var color : Color = Color.randomBackgroundColor()
+    var color : Color
    
     var imageName : String {
         self.isCompleted ? "checkmark.circle.fill" : "circle.fill"
     }
     
-    init(title: String, note: String,deadlineDate: Date) {
+    init(title: String, note: String,deadlineDate: Date,color: Color) {
         self.title = title
         self.note = note
         self.deadlineDate = deadlineDate
+        self.color = color
     }
     
     static func == (lhs: Todo, rhs: Todo) -> Bool {

@@ -19,7 +19,7 @@ struct TodoItem: View {
                 } label: {
                     Image(systemName : todo.imageName)
                         .resizable()
-                        .frame(width: 30, height: 30, alignment: .leading)
+                        .frame(width: 35, height: 35, alignment: .leading)
                         .foregroundColor(todo.color)
                         
                     
@@ -31,15 +31,17 @@ struct TodoItem: View {
                     VStack(alignment: .leading) {
                         Text(todo.title)
                             .font(.title3)
+                            .fontWeight(.bold)
                             .strikethrough(todo.isCompleted)
                         Text(todo.note)
+                            .font(.caption2)
                             .strikethrough(todo.isCompleted)
                         
                     }
                     Spacer()
                     VStack{
                         Text( todo.deadlineDate.formatDateTime())
-                            .font(.caption2)
+                            .font(.caption)
  
                     }
                     
@@ -51,6 +53,6 @@ struct TodoItem: View {
 
 struct TodoItem_Previews: PreviewProvider {
     static var previews: some View {
-        TodoItem(todo: Todo(title: "Title Example", note: "Note Example",deadlineDate: Date.now))
+        TodoItem(todo: Todo(title: "Title Example", note: "Note Example",deadlineDate: Date.now,color: .green))
     }
 }

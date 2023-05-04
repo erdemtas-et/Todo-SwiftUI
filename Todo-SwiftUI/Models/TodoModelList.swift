@@ -12,7 +12,7 @@ class TodoModelList : ObservableObject {
    @Published var todos : [Todo] = []
     
     func addTodo(todo: Todo) {
-        todos.append(Todo(title: todo.title, note: todo.note,deadlineDate: todo.deadlineDate))
+        todos.append(Todo(title: todo.title, note: todo.note,deadlineDate: todo.deadlineDate,color: todo.color))
     }
     
 }

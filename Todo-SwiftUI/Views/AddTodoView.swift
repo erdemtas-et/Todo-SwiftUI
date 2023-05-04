@@ -64,8 +64,7 @@ struct AddTodoView: View {
                             .fill(todoColor)
                             .frame(width: 30, height: 30, alignment: .center)
                     }
-                           
-                        
+    
                            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7)) {
                                ForEach(Color.colorArray, id: \.self) { color in
                                    Button(action: {
@@ -83,7 +82,7 @@ struct AddTodoView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        todoModelList.addTodo(todo: Todo(title: titleString, note: noteString, deadlineDate: todoDate))
+                        todoModelList.addTodo(todo: Todo(title: titleString, note: noteString, deadlineDate: todoDate,color: todoColor))
                         self.presentationMode.wrappedValue.dismiss()
                     }
                     label: {
