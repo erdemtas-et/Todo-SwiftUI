@@ -10,11 +10,20 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var todoModelList = TodoModelList()
+    @State var searchText = ""
+    
+    var searchResults: [Todo] {
+           if searchText.isEmpty {
+               return todoModelList.todos
+           } else {
+               return todoModelList.todos.filter { $0.title.contains(searchText) }
+           }
+       }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
-                List(todoModelList.todos) { (todo) in
+                List(searchResults) { (todo) in
                     NavigationLink(destination: Text(todo.title)) {
                         TodoItem(todo: todo)
                     }
@@ -32,7 +41,7 @@ struct ContentView: View {
                     )}
                 }
             }
-        }
+        }.searchable(text: $searchText,prompt: "Search")
     }
     
     struct ContentView_Previews: PreviewProvider {

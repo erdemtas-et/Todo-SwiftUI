@@ -30,11 +30,12 @@ struct TodoItem: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text(todo.title)
-                            .font(.title3)
+                            .font(.system(.callout))
                             .fontWeight(.bold)
                             .strikethrough(todo.isCompleted)
+                            .padding(.bottom,3.0)
                         Text(todo.note)
-                            .font(.caption2)
+                            .font(.caption)
                             .strikethrough(todo.isCompleted)
                         
                     }
@@ -43,7 +44,7 @@ struct TodoItem: View {
                         Text( todo.deadlineDate.formatDateTime())
                             .font(.caption)
  
-                    }
+                    }.padding(.all,10.0)
                     
                 }
             }
