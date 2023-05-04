@@ -15,4 +15,8 @@ class TodoModelList : ObservableObject {
         todos.append(Todo(title: todo.title, note: todo.note,deadlineDate: todo.deadlineDate,color: todo.color))
     }
     
+    func deleteTodo(index: IndexSet) {
+        todos.remove(atOffsets: index)
+    }
+    
 }

@@ -23,11 +23,14 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List(searchResults) { (todo) in
-                    NavigationLink(destination: Text(todo.title)) {
-                        TodoItem(todo: todo)
-                    }
+                List {
+                    ForEach(searchResults) { (todo) in
+                        NavigationLink(destination: Text(todo.title)) {
+                            TodoItem(todo: todo)
+                        }
+                    }.onDelete(perform: todoModelList.deleteTodo)
                 }
+                
                 .navigationTitle("Todos")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
