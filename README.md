@@ -30,7 +30,3 @@ A simple Todo app built using SwiftUI and Combine.
 - Xcode 12 or higher.
 - iOS 14 or higher.
 
-## Installation
-
-1. Clone the repository:
-
