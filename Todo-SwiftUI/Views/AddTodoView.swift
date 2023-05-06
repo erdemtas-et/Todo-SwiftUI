@@ -1,21 +1,16 @@
-//
-//  AddTodoView.swift
-//  Todo-SwiftUI
-//
-//  Created by Erdem Tas on 3.05.2023.
-//
-
 import SwiftUI
 import Combine
 
 struct AddTodoView: View {
+   
     @Environment(\.presentationMode) var presentationMode
-    @State var todoModelList : TodoModelList
-    @State var titleString : String = ""
-    @State var noteString : String = ""
-    @State private var todoDate : Date = .now
-    @State var todoColor : Color = .gray
-    @State var isButtonActivated  = false
+    @State var todoModelList: TodoModelList
+    var todoFromContentView: Todo?
+    @State var titleString: String = ""
+    @State var noteString: String = ""
+    @State private var todoDate: Date = .now
+    @State var todoColor: Color = .gray
+    @State var isButtonActivated = false
     @State var path = [String]()
     
     func validateFields() {
@@ -27,7 +22,6 @@ struct AddTodoView: View {
     }
     
     var body: some View {
-        
         Form {
             Section {
                 VStack(alignment: .leading) {
@@ -36,8 +30,8 @@ struct AddTodoView: View {
                         .font(.caption)
                     TextField("Title", text: $titleString)
                         .onReceive(Just(titleString)) { newValue in
-                        validateFields()
-                    }
+                            validateFields()
+                        }
                 }.padding(.vertical,4.0)
                 
                 VStack(alignment: .leading) {
@@ -55,51 +49,34 @@ struct AddTodoView: View {
                         .frame(width: 320)
                 }
             }
-
-            Section {
-                VStack {
-                    HStack {
-                        Text("Choose a color:")
-                        Circle()
-                            .fill(todoColor)
-                            .frame(width: 30, height: 30, alignment: .center)
-                    }
-    
-                           LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7)) {
-                               ForEach(Color.colorArray, id: \.self) { color in
-                                   Button(action: {
-                                       todoColor = color
-                                   }, label: {
-                                       Circle()
-                                           .fill(color)
-                                   })
-                                   .buttonStyle(.borderless)
-                               }
-                           }
-                       }
-                }
         }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        todoModelList.addTodo(todo: Todo(title: titleString, note: noteString, deadlineDate: todoDate,color: todoColor))
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                    label: {
-                        Image(systemName: "plus.circle")
-                            .resizable()
-                            .frame(width: 30, height: 30, alignment: .bottom)
-                            .foregroundColor(isButtonActivated ? .green : .gray)
-                    }.disabled(!isButtonActivated)
-                }
+        .onAppear {
+            if let todo = todoFromContentView {
+                titleString = todo.title
+                noteString = todo.note
+                todoDate = todo.deadlineDate
+                
             }
-            
-        
-    }
-}
-
-struct AddTodoView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddTodoView(todoModelList: TodoModelList())
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    if let todo = todoFromContentView {
+                        let updatedTodo = Todo(title: titleString, note: noteString, deadlineDate: todoDate)
+                       
+                    } else {
+                        let newTodo = Todo(title: titleString, note: noteString, deadlineDate: todoDate)
+                        todoModelList.addTodo(todo: newTodo)
+                    }
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+                label: {
+                    Image(systemName: "plus.circle")
+                        .resizable()
+                        .frame(width: 30, height: 30, alignment: .bottom)
+                        .foregroundColor(isButtonActivated ? .green : .gray)
+                }.disabled(!isButtonActivated)
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@ struct ContentView: View {
             VStack {
                 List {
                     ForEach(searchResults) { (todo) in
-                        NavigationLink(destination: Text(todo.title)) {
+                        NavigationLink(destination: AddTodoView( todoModelList: todoModelList)) {
                             TodoItem(todo: todo)
                         }
                     }.onDelete(perform: todoModelList.deleteTodo)
@@ -35,12 +35,12 @@ struct ContentView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink(destination:  AddTodoView(todoModelList: todoModelList),
-                        label: {
-                            Image(systemName: "plus.circle.fill")
-                                .resizable()
-                                .frame(width: 25, height: 25, alignment: .bottom)
-                                .foregroundColor(.orange)
-                        }
+                                       label: {
+                                           Image(systemName: "plus.circle")
+                                               .resizable()
+                                               .frame(width: 30, height: 30, alignment: .bottom)
+                                               .foregroundColor(.blue)
+                                       }
                     )}
                 }
             }

@@ -10,7 +10,7 @@ import SwiftUI
 struct TodoItem: View {
     
    @ObservedObject var todo : Todo
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -19,11 +19,8 @@ struct TodoItem: View {
                 } label: {
                     Image(systemName : todo.imageName)
                         .resizable()
-                        .frame(width: 35, height: 35, alignment: .leading)
-                        .foregroundColor(todo.color)
-                        
-                    
-                    
+                        .frame(width: 30, height: 30, alignment: .leading)
+                        .foregroundColor(todo.isCompleted ? .green  :.pink)
                 }.buttonStyle(BorderlessButtonStyle())
 
                 
@@ -37,7 +34,6 @@ struct TodoItem: View {
                         Text(todo.note)
                             .font(.caption)
                             .strikethrough(todo.isCompleted)
-                        
                     }
                     Spacer()
                     VStack{
@@ -54,6 +50,6 @@ struct TodoItem: View {
 
 struct TodoItem_Previews: PreviewProvider {
     static var previews: some View {
-        TodoItem(todo: Todo(title: "Title Example", note: "Note Example",deadlineDate: Date.now,color: .green))
+        TodoItem(todo: Todo(title: "Title Example", note: "Note Example",deadlineDate: Date.now))
     }
 }
