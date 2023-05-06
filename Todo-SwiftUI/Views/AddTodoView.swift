@@ -5,13 +5,12 @@ struct AddTodoView: View {
    
     @Environment(\.presentationMode) var presentationMode
     @State var todoModelList: TodoModelList
-    var todoFromContentView: Todo?
+    @State var todoFromContentView: Todo?
     @State var titleString: String = ""
     @State var noteString: String = ""
     @State private var todoDate: Date = .now
     @State var todoColor: Color = .gray
     @State var isButtonActivated = false
-    @State var path = [String]()
     
     func validateFields() {
         if titleString != "" && noteString != "" {
@@ -63,7 +62,7 @@ struct AddTodoView: View {
                 Button {
                     if let todo = todoFromContentView {
                         let updatedTodo = Todo(title: titleString, note: noteString, deadlineDate: todoDate)
-                       
+                        todoModelList.updateTodo(oldTodo: todo, newTodo: updatedTodo)
                     } else {
                         let newTodo = Todo(title: titleString, note: noteString, deadlineDate: todoDate)
                         todoModelList.addTodo(todo: newTodo)

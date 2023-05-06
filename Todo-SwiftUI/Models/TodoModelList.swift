@@ -26,7 +26,12 @@ class TodoModelList : ObservableObject {
     func deleteTodo(index: IndexSet) {
         todos.remove(atOffsets: index)
     }
-    
+    func updateTodo(oldTodo: Todo, newTodo: Todo) {
+            if let index = todos.firstIndex(where: { $0.id == oldTodo.id }) {
+                todos[index] = newTodo
+            }
+        saveTodos()
+        }
     func saveTodos() {
         do {
         try UserDefaults.standard.set(JSONEncoder().encode(todos), forKey: "todosUD")
@@ -35,13 +40,12 @@ class TodoModelList : ObservableObject {
         }
     }
     
+    
     func getTodos() {
         guard let savedTodosUD = UserDefaults.standard.data(forKey: "todosUD") else {return}
         guard let savedTodosList = try? JSONDecoder().decode([Todo].self, from: savedTodosUD) else {return}
-
         self.todos = savedTodosList
-        
-       
+
     }
     
 }

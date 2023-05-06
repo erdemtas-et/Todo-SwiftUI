@@ -25,7 +25,7 @@ struct ContentView: View {
             VStack {
                 List {
                     ForEach(searchResults) { (todo) in
-                        NavigationLink(destination: AddTodoView( todoModelList: todoModelList)) {
+                        NavigationLink(destination: AddTodoView( todoModelList: todoModelList,todoFromContentView: todo)) {
                             TodoItem(todo: todo)
                         }
                     }.onDelete(perform: todoModelList.deleteTodo)
