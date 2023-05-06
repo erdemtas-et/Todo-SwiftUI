@@ -14,15 +14,16 @@ A simple Todo app built using SwiftUI and Combine.
 
 ### Add Todo View
 
-![Add Todo View](/screenshots/add_todo.png)
+<img src="/screenshots/add_todo.png" alt="Add Todo View" width="50%" height="50%">
+
 
 ### Todo List View
+<img src="/screenshots/todo_list.png" alt="Add Todo View" width="50%" height="50%">
 
-![Todo List View](/screenshots/todo_list.png)
 
 ### Todo Detail View
+<img src="/screenshots/todo_detail.png" alt="Add Todo View" width="50%" height="50%">
 
-![Todo Detail View](/screenshots/todo_detail.png)
 
 ## Requirements
 
