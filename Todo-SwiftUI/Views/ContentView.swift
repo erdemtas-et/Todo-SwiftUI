@@ -26,7 +26,7 @@ struct ContentView: View {
                 List {
                     ForEach(searchResults) { (todo) in
                         NavigationLink(destination: AddTodoView( todoModelList: todoModelList,todoFromContentView: todo)) {
-                            TodoItem(todo: todo)
+                            TodoItem(todo: todo,todoList: todoModelList)
                         }
                     }.onDelete(perform: todoModelList.deleteTodo)
                 }

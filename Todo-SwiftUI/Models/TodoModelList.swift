@@ -26,6 +26,16 @@ class TodoModelList : ObservableObject {
     func deleteTodo(index: IndexSet) {
         todos.remove(atOffsets: index)
     }
+    
+    func toggleTodo(todo: Todo) {
+        todo.isCompleted.toggle()
+        var todoValue = todo.isCompleted
+        if let index = todos.firstIndex(where: { $0.id == todo.id }) {
+            todos[index].isCompleted = todoValue
+        }
+        saveTodos()
+    }
+    
     func updateTodo(oldTodo: Todo, newTodo: Todo) {
             if let index = todos.firstIndex(where: { $0.id == oldTodo.id }) {
                 todos[index] = newTodo

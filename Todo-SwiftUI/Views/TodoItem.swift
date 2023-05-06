@@ -10,12 +10,13 @@ import SwiftUI
 struct TodoItem: View {
     
    @ObservedObject var todo : Todo
+    @State var todoList: TodoModelList
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Button {
-                    todo.isCompleted.toggle()
+                    todoList.toggleTodo(todo: todo)
                 } label: {
                     Image(systemName : todo.imageName)
                         .resizable()
@@ -50,6 +51,6 @@ struct TodoItem: View {
 
 struct TodoItem_Previews: PreviewProvider {
     static var previews: some View {
-        TodoItem(todo: Todo(title: "Title Example", note: "Note Example",deadlineDate: Date.now))
+        TodoItem(todo: Todo(title: "Title Example", note: "Note Example",deadlineDate: Date.now),todoList: TodoModelList())
     }
 }
